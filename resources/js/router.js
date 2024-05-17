@@ -8,6 +8,10 @@ const routes = [
     {
         path: '/posts/:id',
         component: () => import('./Pages/PostsRoute.vue'),
+    },
+    {
+        path: '/posts/create',
+        component: () => import('./Pages/PostsCreateRoute.vue'),
     }
 ];
 

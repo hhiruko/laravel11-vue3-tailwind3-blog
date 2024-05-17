@@ -5,11 +5,17 @@ import moment from "moment";
 
 const params = new URL(document.location.toString()).searchParams;
 const posts = ref([]);
+const name = ref([]);
 const request = async () => {
     await axios
         .get('/api/posts?' + params.toString())
         .then(response => {
             posts.value = response.data
+        })
+    await axios
+        .get('/api/user')
+        .then(response => {
+            name.value = response.data
         })
 }
 
@@ -34,8 +40,9 @@ onMounted(request);
 
 <template>
     <div class="flex">
-        <div class="w-2/5">
-
+        <div class="w-2/5 m-12 ">
+            <h1 class="mb-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Imitating: {{name.name}}</h1>
+            <a href="/posts/create" type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create post</a>
         </div>
         <div class="w-3/5">
             <div class="mt-12 flex flex-col items-center">
